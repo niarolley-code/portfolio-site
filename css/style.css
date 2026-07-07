@@ -1,0 +1,481 @@
+/* ==========================================================================
+   NIA C. ROLLEY — SITE STYLES
+   ==========================================================================
+   This file controls the look of every page. It's organized top to bottom:
+
+     1. Variables      -- all colors & fonts live here. Change a value once,
+                           it updates everywhere on the site.
+     2. Reset & base    -- resets browser defaults, sets up body text
+     3. Layout          -- the shared page shell (container widths, spacing)
+     4. Typography      -- headings, paragraphs, links, lists
+     5. Header & nav     -- the top bar with the site title and menu
+     6. Buttons & tags   -- small reusable UI pieces (buttons, "coming soon"
+                           badges, pill labels)
+     7. Components       -- bigger reusable blocks (hero, cards, job entries)
+     8. Footer
+     9. Responsive       -- adjustments for small screens (phones/tablets)
+
+   Tip: search this file for a section header (e.g. "5. HEADER & NAV") to
+   jump straight to the part you want to edit.
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. VARIABLES
+   These are "CSS custom properties." Think of them as named nicknames for
+   values you use over and over. Change the hex code here once, and every
+   place that uses var(--color-brick) updates automatically.
+   -------------------------------------------------------------------------- */
+:root {
+  /* --- Color palette: "Brick & Ink" ---
+     brick    = warm terracotta, used for links/headings/accents
+     cream    = warm off-white, the main page background
+     cream-alt = a slightly deeper cream, used for card backgrounds
+     ink      = near-black, used for body text
+     sage     = muted green, used for small secondary details */
+  --color-brick: #B5502E;
+  --color-brick-dark: #8F3F22;
+  --color-cream: #F7F1E8;
+  --color-cream-alt: #EFE5D5;
+  --color-ink: #232020;
+  --color-ink-soft: #4A4542; /* a lighter version of ink, for secondary text */
+  --color-sage: #7A8B6F;
+  --color-white: #FFFFFF;
+  --color-border: #DED2BE; /* soft line color used for rules/dividers */
+
+  /* --- Fonts ---
+     heading = Lora (serif) — used for all headings, feels editorial/warm
+     body    = Inter (sans-serif) — used for paragraphs, feels clean/readable
+     Both are loaded from Google Fonts in the <head> of each HTML page. */
+  --font-heading: "Lora", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* --- Spacing scale ---
+     Using a consistent set of spacing values (instead of random numbers)
+     keeps the whole site feeling intentional. */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 3.5rem;
+  --space-xl: 6rem;
+
+  /* --- Layout widths --- */
+  --content-width: 42rem;   /* comfortable reading width for paragraphs */
+  --wide-width: 60rem;      /* wider width for the header, grids, etc. */
+}
+
+
+/* --------------------------------------------------------------------------
+   2. RESET & BASE
+   Browsers apply their own default spacing/sizing to elements. This section
+   clears that out so we start from a predictable, clean slate.
+   -------------------------------------------------------------------------- */
+* {
+  box-sizing: border-box; /* padding/borders no longer add to an element's width */
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-ink);
+  background-color: var(--color-cream);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   3. LAYOUT
+   .container centers content and keeps it from stretching edge-to-edge on
+   wide screens. Most sections on the site sit inside one of these.
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.container-wide {
+  width: 100%;
+  max-width: var(--wide-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+main {
+  display: block;
+  padding-bottom: var(--space-xl);
+}
+
+section {
+  padding-top: var(--space-lg);
+}
+
+/* A thin horizontal rule used to separate sections, echoing a printed
+   program or broadsheet layout. */
+.rule {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: var(--space-lg) 0;
+}
+
+
+/* --------------------------------------------------------------------------
+   4. TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-ink);
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 2.9rem);
+  margin-bottom: var(--space-sm);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 1.9rem);
+  margin-bottom: var(--space-sm);
+  color: var(--color-brick);
+}
+
+h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-xs);
+}
+
+p {
+  margin-bottom: var(--space-sm);
+  max-width: 65ch; /* keeps paragraph lines from getting too wide to read comfortably */
+}
+
+.lede {
+  /* An intro/opening paragraph, styled slightly larger for emphasis. */
+  font-size: 1.25rem;
+  color: var(--color-ink-soft);
+  font-family: var(--font-heading);
+  font-style: italic;
+}
+
+a {
+  color: var(--color-brick);
+  text-decoration: underline;
+  text-decoration-color: var(--color-border);
+  text-underline-offset: 3px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+a:hover {
+  color: var(--color-brick-dark);
+  text-decoration-color: var(--color-brick-dark);
+}
+
+ul, ol {
+  margin: 0 0 var(--space-sm) var(--space-md);
+}
+
+li {
+  margin-bottom: var(--space-xs);
+}
+
+strong {
+  font-weight: 600;
+}
+
+
+/* --------------------------------------------------------------------------
+   5. HEADER & NAV
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--color-cream);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-inner {
+  max-width: var(--wide-width);
+  margin: 0 auto;
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.site-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.site-title:hover {
+  color: var(--color-brick);
+}
+
+.site-tagline {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--color-ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* The nav menu itself */
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: var(--space-md);
+  margin: 0;
+}
+
+.nav-list a {
+  text-decoration: none;
+  color: var(--color-ink);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-list a:hover,
+.nav-list a.active {
+  color: var(--color-brick);
+  border-bottom-color: var(--color-brick);
+}
+
+/* Hamburger button — hidden on desktop, shown on small screens (see
+   section 9, RESPONSIVE, near the bottom of this file). */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 26px;
+  height: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: var(--color-ink);
+}
+
+
+/* --------------------------------------------------------------------------
+   6. BUTTONS & TAGS
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-white);
+  background-color: var(--color-brick);
+  padding: 0.7rem 1.4rem;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 1px solid var(--color-brick);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn:hover {
+  background-color: var(--color-brick-dark);
+  border-color: var(--color-brick-dark);
+  color: var(--color-white);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-brick);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-brick);
+  color: var(--color-white);
+}
+
+.btn-group {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-top: var(--space-md);
+}
+
+/* Small uppercase pill label, used for "Coming Soon" and section eyebrows */
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-white);
+  background-color: var(--color-sage);
+  padding: 0.25rem 0.65rem;
+  border-radius: 3px;
+}
+
+.eyebrow {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-sage);
+  margin-bottom: var(--space-xs);
+}
+
+
+/* --------------------------------------------------------------------------
+   7. COMPONENTS
+   -------------------------------------------------------------------------- */
+
+/* --- Hero (used at the top of the Home page) --- */
+.hero {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-lg);
+}
+
+/* --- Card: a bordered content block, used for jobs, writing entries, etc. --- */
+.card {
+  background-color: var(--color-cream-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.card h3 {
+  font-family: var(--font-heading);
+  color: var(--color-ink);
+}
+
+.card .role {
+  color: var(--color-brick);
+  font-weight: 600;
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Coming soon card: a dashed, quieter variant of .card --- */
+.card-coming-soon {
+  background-color: transparent;
+  border: 1px dashed var(--color-border);
+  border-radius: 6px;
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.card-coming-soon h3 {
+  color: var(--color-ink-soft);
+}
+
+/* --- Value/skill list item with a bold lead-in term --- */
+.value-item {
+  margin-bottom: var(--space-sm);
+  list-style: none;
+  padding-left: var(--space-md);
+  position: relative;
+}
+
+.value-item::before {
+  content: "\2014"; /* em dash */
+  position: absolute;
+  left: 0;
+  color: var(--color-brick);
+}
+
+/* --- Currently page: simple two-column definition-style layout --- */
+.currently-item {
+  margin-bottom: var(--space-lg);
+}
+
+.currently-item h3 {
+  color: var(--color-brick);
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-xs);
+}
+
+/* --------------------------------------------------------------------------
+   8. FOOTER
+   -------------------------------------------------------------------------- */
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.site-footer p {
+  max-width: none;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  margin-bottom: 0;
+}
+
+
+/* --------------------------------------------------------------------------
+   9. RESPONSIVE
+   Below 700px wide (most phones), collapse the nav into a hamburger menu.
+   -------------------------------------------------------------------------- */
+@media (max-width: 700px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-list {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: var(--space-sm);
+    padding-top: var(--space-sm);
+  }
+
+  /* JS adds the "open" class to .nav-list when the hamburger is tapped */
+  .nav-list.open {
+    display: flex;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-inner .nav-toggle {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-md);
+  }
+
+  .header-inner {
+    position: relative;
+  }
+}

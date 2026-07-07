@@ -27,21 +27,30 @@
    place that uses var(--color-brick) updates automatically.
    -------------------------------------------------------------------------- */
 :root {
-  /* --- Color palette: "Brick & Ink" ---
-     brick    = warm terracotta, used for links/headings/accents
-     cream    = warm off-white, the main page background
-     cream-alt = a slightly deeper cream, used for card backgrounds
-     ink      = near-black, used for body text
-     sage     = muted green, used for small secondary details */
-  --color-brick: #B5502E;
-  --color-brick-dark: #8F3F22;
-  --color-cream: #F7F1E8;
-  --color-cream-alt: #EFE5D5;
-  --color-ink: #232020;
-  --color-ink-soft: #4A4542; /* a lighter version of ink, for secondary text */
-  --color-sage: #7A8B6F;
+  /* --- Color palette: coolors.co/palette/233d4d-fe7f2d-fcca46-a1c181-619b8a ---
+     brick    = the palette's orange (#FE7F2D), darkened for use as link/button
+                text so it's readable — the raw orange is too light on cream
+     cream    = warm off-white, the main page background (not from the
+                palette — the palette is all accent colors, so this stays a
+                neutral backdrop for them to sit on)
+     cream-alt = a pale mint tint, used for card backgrounds
+     ink      = the palette's navy (#233D4D), used for body text
+     ink-soft = a lighter navy, for secondary/muted text
+     sage     = the palette's sage green (#A1C181), used for small badges
+     gold     = the palette's gold (#FCCA46), used sparingly as a highlight
+     teal     = the palette's teal (#619B8A), used for secondary buttons */
+  --color-brick: #C1530E;
+  --color-brick-dark: #9C4209;
+  --color-cream: #FAFAF7;
+  --color-cream-alt: #EEF5F1;
+  --color-ink: #233D4D;
+  --color-ink-soft: #52697A; /* a lighter version of ink, for secondary text */
+  --color-sage: #A1C181;
+  --color-gold: #FCCA46;
+  --color-teal: #619B8A;
+  --color-teal-dark: #4C7C6F;
   --color-white: #FFFFFF;
-  --color-border: #DED2BE; /* soft line color used for rules/dividers */
+  --color-border: #D7E1E4; /* soft line color used for rules/dividers */
 
   /* --- Fonts ---
      heading = Lora (serif) — used for all headings, feels editorial/warm
@@ -172,7 +181,7 @@ p {
 a {
   color: var(--color-brick);
   text-decoration: underline;
-  text-decoration-color: var(--color-border);
+  text-decoration-color: var(--color-gold);
   text-underline-offset: 3px;
   transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
@@ -308,11 +317,12 @@ strong {
 
 .btn-outline {
   background-color: transparent;
-  color: var(--color-brick);
+  color: var(--color-teal-dark);
+  border-color: var(--color-teal-dark);
 }
 
 .btn-outline:hover {
-  background-color: var(--color-brick);
+  background-color: var(--color-teal-dark);
   color: var(--color-white);
 }
 
@@ -330,7 +340,7 @@ strong {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--color-white);
+  color: var(--color-ink); /* dark text on the light sage background, for readability */
   background-color: var(--color-sage);
   padding: 0.25rem 0.65rem;
   border-radius: 3px;
@@ -342,7 +352,7 @@ strong {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-sage);
+  color: var(--color-teal-dark); /* the light sage/teal don't have enough contrast as small text */
   margin-bottom: var(--space-xs);
 }
 
@@ -385,7 +395,7 @@ strong {
 /* --- Coming soon card: a dashed, quieter variant of .card --- */
 .card-coming-soon {
   background-color: transparent;
-  border: 1px dashed var(--color-border);
+  border: 1px dashed var(--color-gold);
   border-radius: 6px;
   padding: var(--space-md);
   margin-bottom: var(--space-md);

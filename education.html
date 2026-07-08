@@ -50,21 +50,48 @@
     <section>
       <div class="container">
 
-        <article class="card">
-          <span class="tag">Currently Enrolled</span>
-          <h3 style="margin-top: 0.75rem;">Master of City and Regional Planning</h3>
-          <span class="role">Morgan State University</span>
-          <p>Deepening my focus on urban systems, community development, and the structural conditions that shape how cities work &mdash; and who they work for.</p>
+        <!-- Each school card has a faint state outline tucked in the back
+             corner (see .state-outline in css/style.css — pure decoration,
+             not a school crest/seal/logo) and a small two-tone accent bar
+             under the school name in that school's general colors. Both
+             live in a .school-card-content wrapper so they stack above
+             the background outline. -->
+        <article class="card school-card">
+          <!-- Maryland outline (simplified, not to scale) -->
+          <div class="state-outline state-outline--maryland" aria-hidden="true">
+            <svg viewBox="0 0 100 60" preserveAspectRatio="xMidYMid meet">
+              <path d="M5,32 L22,28 L24,34 L40,26 L42,18 L58,20 L56,30 L68,26 L72,34 L86,30 L98,38 L94,48 L84,44 L78,52 L66,46 L58,52 L48,44 L38,50 L28,42 L16,44 L8,38 Z" />
+            </svg>
+          </div>
+
+          <div class="school-card-content">
+            <span class="tag">Currently Enrolled</span>
+            <h3 style="margin-top: 0.75rem;">Master of City and Regional Planning</h3>
+            <span class="role">Morgan State University</span>
+            <span class="school-accent school-accent--morgan"></span>
+            <p>Deepening my focus on urban systems, community development, and the structural conditions that shape how cities work &mdash; and who they work for.</p>
+          </div>
         </article>
 
-        <article class="card">
-          <h3>Bachelor of Arts in Political Science</h3>
-          <span class="role">Spelman College</span>
-          <ul>
-            <li>First Place Award, Spelman Research Day (2024)</li>
-            <li>National Society of Leadership and Success Scholar (2023)</li>
-            <li>Epsilon Eta Chapter of Sigma Gamma Rho Sorority Inc. (2024)</li>
-          </ul>
+        <article class="card school-card">
+          <!-- Georgia outline (simplified, not to scale) -->
+          <div class="state-outline state-outline--georgia" aria-hidden="true">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+              <path d="M30,2 L70,2 L88,20 L84,45 L68,72 L50,96 L34,74 L18,46 L14,20 Z" />
+            </svg>
+          </div>
+
+          <div class="school-card-content">
+            <h3>Bachelor of Arts in Political Science</h3>
+            <span class="role">Spelman College</span>
+            <span class="school-accent school-accent--spelman"></span>
+            <p>Spelman is a historically Black college for women with a legacy of producing leaders who don&rsquo;t shrink to fit a room. It&rsquo;s where I first learned to name the instincts I already had &mdash; about equity, about voice, about who gets to lead &mdash; as a discipline instead of just a feeling.</p>
+            <ul>
+              <li>First Place Award, Spelman Research Day (2024)</li>
+              <li>National Society of Leadership and Success Scholar (2023)</li>
+              <li>Epsilon Eta Chapter of Sigma Gamma Rho Sorority Inc. (2024)</li>
+            </ul>
+          </div>
         </article>
 
       </div>

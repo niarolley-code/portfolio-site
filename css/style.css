@@ -51,6 +51,13 @@
   --color-teal-dark: #4C7C6F;
   --color-white: #FFFFFF;
   --color-border: #D7E1E4; /* soft line color used for rules/dividers */
+  --color-lede: #3B5364; /* a darker, more readable shade for the homepage tagline */
+
+  /* Approximate height of the sticky header, used to vertically center the
+     homepage hero within the remaining viewport space. If you change the
+     header's padding/font sizes enough that its height shifts noticeably,
+     nudge this value to match. */
+  --header-height: 4.75rem;
 
   /* --- Fonts ---
      heading = Lora (serif) — used for all headings, feels editorial/warm
@@ -130,6 +137,13 @@ section {
   padding-top: var(--space-lg);
 }
 
+/* Sections used as jump-nav targets (id="...") get extra top clearance
+   so anchor links don't scroll them in underneath the sticky header
+   (and sticky sub-nav, on pages that have one). */
+section[id] {
+  scroll-margin-top: 8rem;
+}
+
 /* A thin horizontal rule used to separate sections, echoing a printed
    program or broadsheet layout. */
 .rule {
@@ -173,9 +187,21 @@ p {
 .lede {
   /* An intro/opening paragraph, styled slightly larger for emphasis. */
   font-size: 1.25rem;
-  color: var(--color-ink-soft);
+  color: var(--color-lede);
   font-family: var(--font-heading);
   font-style: italic;
+  margin-bottom: var(--space-md);
+}
+
+/* A short accent bar under the lede, so it reads as a distinct beat from
+   the heading that follows rather than blurring into one block. */
+.lede::after {
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 3px;
+  background-color: var(--color-gold);
+  margin-top: var(--space-md);
 }
 
 a {
@@ -361,10 +387,54 @@ strong {
    7. COMPONENTS
    -------------------------------------------------------------------------- */
 
-/* --- Hero (used at the top of the Home page) --- */
+/* --- Hero: the intro section at the top of every page (About, Work, etc.
+   each have their own, plus the homepage). Keep this the plain, simple
+   version — the homepage's extra vertical-centering behavior lives in
+   .hero-home below, so it doesn't leak onto every other page. --- */
 .hero {
   padding-top: var(--space-xl);
   padding-bottom: var(--space-lg);
+}
+
+/* --- Homepage-only hero treatment: vertically centers the content in the
+   space below the header, instead of it sitting right under the nav with
+   a big empty gap on tall screens. Applied together with .hero, e.g.
+   <section class="hero hero-home">, only on index.html. --- */
+.hero.hero-home {
+  min-height: calc(100vh - var(--header-height));
+  display: flex;
+  align-items: center;
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-lg);
+}
+
+/* Two-column layout: text on the left, a photo placeholder on the right.
+   grid-template-columns gives the text column a bit more room than the
+   photo column. On mobile this collapses to one column (see RESPONSIVE). */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: var(--space-xl);
+  align-items: center;
+  width: 100%;
+}
+
+/* Stand-in for a future headshot/photo. Swap this for an <img> tag once
+   you have a photo — e.g. <img src="assets/nia-photo.jpg" alt="Nia Rolley"> —
+   and you can delete the .hero-photo-placeholder rule below. */
+.hero-photo-placeholder {
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  border: 1px dashed var(--color-border);
+  border-radius: 6px;
+  background-color: var(--color-cream-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-md);
+  color: var(--color-ink-soft);
+  font-size: 0.85rem;
 }
 
 /* --- Card: a bordered content block, used for jobs, writing entries, etc. --- */
@@ -392,6 +462,68 @@ strong {
   margin-bottom: 0;
 }
 
+/* --- School cards (Education page): a faint state-outline watermark in
+   the back corner, plus a small two-tone accent bar in the school's
+   colors under its name. Both are additions on top of .card, not a
+   replacement for it. --- */
+.school-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Everything real (text, list, etc.) sits in here, with z-index above
+   the background outline — see the stacking note on .state-outline. */
+.school-card-content {
+  position: relative;
+  z-index: 1;
+}
+
+.state-outline {
+  position: absolute;
+  bottom: -0.5rem;
+  right: -0.5rem;
+  width: 8rem;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.state-outline svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.state-outline path {
+  fill: currentColor;
+}
+
+.state-outline--maryland {
+  color: #00205B; /* Morgan State blue, at low opacity below */
+  opacity: 0.07;
+}
+
+.state-outline--georgia {
+  color: #002D72; /* Spelman blue, at low opacity below */
+  opacity: 0.07;
+}
+
+.school-accent {
+  display: block;
+  width: 3rem;
+  height: 4px;
+  border-radius: 2px;
+  margin-bottom: var(--space-sm);
+}
+
+.school-accent--morgan {
+  background: linear-gradient(to right, #00205B 50%, #F68B1F 50%);
+}
+
+.school-accent--spelman {
+  background: linear-gradient(to right, #002D72 50%, #FFFFFF 50%);
+  border: 1px solid var(--color-border); /* keeps the white half visible against the card */
+}
+
 /* --- Coming soon card: a dashed, quieter variant of .card --- */
 .card-coming-soon {
   background-color: transparent;
@@ -405,19 +537,113 @@ strong {
   color: var(--color-ink-soft);
 }
 
-/* --- Value/skill list item with a bold lead-in term --- */
-.value-item {
-  margin-bottom: var(--space-sm);
-  list-style: none;
-  padding-left: var(--space-md);
-  position: relative;
+/* --- Value/teaching card grid: used on the Skills & Values page to turn
+   a list of short points (a bolded term + one sentence) into a scannable
+   2-up grid instead of a long vertical list. Stacks to 1 column on
+   mobile — see RESPONSIVE. --- */
+.value-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin: var(--space-md) 0 var(--space-lg);
 }
 
-.value-item::before {
-  content: "\2014"; /* em dash */
-  position: absolute;
-  left: 0;
+.value-card {
+  background-color: var(--color-cream-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: var(--space-md);
+}
+
+.value-card h3 {
+  font-family: var(--font-heading);
   color: var(--color-brick);
+  font-size: 1.1rem;
+  margin-bottom: var(--space-xs);
+}
+
+.value-card p {
+  margin-bottom: 0;
+  max-width: none;
+}
+
+/* A small line icon, shown above the title on cards that have one (the
+   Teaching grid). Cards without a .card-icon (Core Values) just skip it. */
+.card-icon {
+  margin-bottom: var(--space-sm);
+}
+
+.card-icon svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+  stroke: var(--color-brick);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* --- Sub-navigation: quick jump links to sections on a long page.
+   Sits just under the main header, styled much lighter than it (no
+   background pill/buttons, smaller text) so it doesn't compete with the
+   primary nav. Sticks below the main header while scrolling so it stays
+   useful as a jump menu. --- */
+.subnav {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 9;
+  background-color: var(--color-cream);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.subnav-inner {
+  max-width: var(--wide-width);
+  margin: 0 auto;
+  padding: 0.6rem var(--space-md);
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.subnav a {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-brick);
+  text-decoration: none;
+}
+
+.subnav a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--color-gold);
+}
+
+/* --- Pull quote: an inset editorial quote, used to break up long-form
+   text on pages like About. Matches the italic serif style of the
+   homepage tagline (.lede), with a terracotta rule on the left. --- */
+.pull-quote {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: var(--color-ink);
+  border-left: 3px solid var(--color-brick);
+  padding-left: var(--space-md);
+  margin: var(--space-lg) 0;
+  max-width: 34rem;
+}
+
+.pull-quote p {
+  margin-bottom: var(--space-xs);
+  max-width: none;
+}
+
+.pull-quote cite {
+  display: block;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 0.9rem;
+  color: var(--color-ink-soft);
 }
 
 /* --- Currently page: simple two-column definition-style layout --- */
@@ -487,5 +713,33 @@ strong {
 
   .header-inner {
     position: relative;
+  }
+
+  /* Stack the hero's text/photo columns instead of sitting side by side,
+     and drop the forced full-viewport height so the page doesn't leave a
+     tall empty gap below short content on phones. */
+  .hero.hero-home {
+    min-height: 0;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .hero-photo-placeholder {
+    max-width: 16rem;
+    margin: 0 auto;
+  }
+
+  /* Stack the value/teaching cards to a single column on small screens. */
+  .value-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* The sub-nav's links can wrap to two lines on narrow phones — a bit
+     more vertical breathing room keeps that readable. */
+  .subnav-inner {
+    gap: var(--space-sm) var(--space-md);
   }
 }

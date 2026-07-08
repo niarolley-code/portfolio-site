@@ -38,21 +38,39 @@
     </div>
   </header>
 
+  <!-- ========================= JUMP-TO SUB-NAV ========================= -->
+  <!-- Quick links to the 4 sections on this page. Styled much lighter than
+       the main nav above (see .subnav in css/style.css) so it reads as a
+       secondary, in-page tool rather than competing with primary nav. -->
+  <nav class="subnav" aria-label="Section navigation">
+    <div class="subnav-inner">
+      <a href="#lens">The Lens</a>
+      <a href="#creative-eye">Creative Eye</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#core-values">Core Values</a>
+    </div>
+  </nav>
+
   <!-- ============================== MAIN =============================== -->
   <main>
-    <section class="hero">
+    <section class="hero" id="lens">
       <div class="container">
         <span class="eyebrow">Skills &amp; Values</span>
         <h1>The Lens I Operate Through</h1>
         <p>Everything I build, write, organize, and teach is filtered through a specific point of view &mdash; one I didn&rsquo;t choose so much as inherit and then learned to wield intentionally.</p>
         <p>As a Black woman, I sit at the center of intersectionality. That&rsquo;s not a disclaimer &mdash; it&rsquo;s a design principle. There is nothing I conceptualize that hasn&rsquo;t been examined through multiple layers of lived experience, cultural context, and systemic awareness. Nuance isn&rsquo;t something I add to my work. It&rsquo;s where my work begins.</p>
+
+        <blockquote class="pull-quote">
+          <p>&ldquo;Nuance isn&rsquo;t something I add to my work. It&rsquo;s where my work begins.&rdquo;</p>
+        </blockquote>
+
         <p>My intellectual passions anchor that lens: public health, environmental epidemiology, and education reform. I think about who gets sick and why. I think about which communities bear the weight of environmental neglect. I think about what children are being taught and what they aren&rsquo;t &mdash; and what that costs them. These aren&rsquo;t academic interests. They are the through lines connecting everything I&rsquo;ve chosen to spend my time on.</p>
       </div>
     </section>
 
     <hr class="rule" />
 
-    <section>
+    <section id="creative-eye">
       <div class="container">
         <h2>A Creative Eye</h2>
         <p>I am creative by nature &mdash; and I&rsquo;ve learned that creativity isn&rsquo;t separate from strategy. It&rsquo;s what makes strategy land.</p>
@@ -63,31 +81,82 @@
 
     <hr class="rule" />
 
-    <section>
-      <div class="container">
+    <section id="teaching">
+      <div class="container-wide">
         <h2>A Background in Teaching</h2>
         <p>Before I coordinated events for civic leaders and built partnerships across Baltimore, I was in classrooms. I have taught children and young people from ages 6 to 18 &mdash; from Montessori daycares to charter schools &mdash; and that experience gave me a skill set that no office job could replicate.</p>
 
-        <ul>
-          <li class="value-item"><strong>How to meet people where they are.</strong> A six-year-old and a seventeen-year-old require completely different approaches to the same truth. So does a room full of executives versus a community of first-generation homebuyers. I learned early how to read a room, adapt my communication, and never assume that one size fits anyone.</li>
-          <li class="value-item"><strong>How to hold a room.</strong> Classroom management is one of the most underrated leadership skills in existence. When you can keep 25 children engaged, curious, and accountable, you can run a meeting, lead a team, and facilitate a conversation with just about anyone.</li>
-          <li class="value-item"><strong>How to make complexity accessible.</strong> Good teaching is good translation. It requires breaking down systems, ideas, and information into something a person can actually use. I bring that instinct to everything &mdash; proposals, presentations, community programming, and strategy.</li>
-          <li class="value-item"><strong>How to care about outcomes, not just outputs.</strong> Teachers don&rsquo;t measure success by how much they covered. They measure it by what actually landed. I carry that standard into every project I take on.</li>
-        </ul>
+        <div class="value-grid">
+
+          <div class="value-card">
+            <div class="card-icon" aria-hidden="true">
+              <!-- people / audience -->
+              <svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.3"/><path d="M14.7 20c.3-2.6 2-4.6 4.3-4.9"/></svg>
+            </div>
+            <h3>How to meet people where they are.</h3>
+            <p>A six-year-old and a seventeen-year-old require completely different approaches to the same truth. So does a room full of executives versus a community of first-generation homebuyers. I learned early how to read a room, adapt my communication, and never assume that one size fits anyone.</p>
+          </div>
+
+          <div class="value-card">
+            <div class="card-icon" aria-hidden="true">
+              <!-- microphone / holding a room -->
+              <svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>
+            </div>
+            <h3>How to hold a room.</h3>
+            <p>Classroom management is one of the most underrated leadership skills in existence. When you can keep 25 children engaged, curious, and accountable, you can run a meeting, lead a team, and facilitate a conversation with just about anyone.</p>
+          </div>
+
+          <div class="value-card">
+            <div class="card-icon" aria-hidden="true">
+              <!-- lightbulb / making complexity accessible -->
+              <svg viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a6 6 0 0 0-4 10.5c.8.7 1 1.3 1 2.5h6c0-1.2.2-1.8 1-2.5A6 6 0 0 0 12 2z"/></svg>
+            </div>
+            <h3>How to make complexity accessible.</h3>
+            <p>Good teaching is good translation. It requires breaking down systems, ideas, and information into something a person can actually use. I bring that instinct to everything &mdash; proposals, presentations, community programming, and strategy.</p>
+          </div>
+
+          <div class="value-card">
+            <div class="card-icon" aria-hidden="true">
+              <!-- target / outcomes -->
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
+            </div>
+            <h3>How to care about outcomes, not just outputs.</h3>
+            <p>Teachers don&rsquo;t measure success by how much they covered. They measure it by what actually landed. I carry that standard into every project I take on.</p>
+          </div>
+
+        </div>
       </div>
     </section>
 
     <hr class="rule" />
 
-    <section>
-      <div class="container">
+    <section id="core-values">
+      <div class="container-wide">
         <h2>Core Values</h2>
-        <ul>
-          <li class="value-item"><strong>Nuance over simplicity.</strong> The easy answer is rarely the right one, especially when people are involved.</li>
-          <li class="value-item"><strong>Process as much as vision.</strong> Ideas without infrastructure don&rsquo;t change anything. I build the map alongside the dream.</li>
-          <li class="value-item"><strong>Community as context.</strong> I don&rsquo;t design for people in the abstract. I design for specific communities with specific histories, specific needs, and specific strengths.</li>
-          <li class="value-item"><strong>Excellence as a baseline.</strong> Not perfectionism &mdash; excellence. There&rsquo;s a difference. Perfectionism is fear. Excellence is standard.</li>
-        </ul>
+
+        <div class="value-grid">
+
+          <div class="value-card">
+            <h3>Nuance over simplicity.</h3>
+            <p>The easy answer is rarely the right one, especially when people are involved.</p>
+          </div>
+
+          <div class="value-card">
+            <h3>Process as much as vision.</h3>
+            <p>Ideas without infrastructure don&rsquo;t change anything. I build the map alongside the dream.</p>
+          </div>
+
+          <div class="value-card">
+            <h3>Community as context.</h3>
+            <p>I don&rsquo;t design for people in the abstract. I design for specific communities with specific histories, specific needs, and specific strengths.</p>
+          </div>
+
+          <div class="value-card">
+            <h3>Excellence as a baseline.</h3>
+            <p>Not perfectionism &mdash; excellence. There&rsquo;s a difference. Perfectionism is fear. Excellence is standard.</p>
+          </div>
+
+        </div>
       </div>
     </section>
   </main>
